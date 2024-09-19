@@ -104,3 +104,4 @@ C:\Users\b.alhassoun.ext\source\repos\HerfaTest\HerfaTest\obj\Debug\net6.0\refin
 C:\Users\b.alhassoun.ext\source\repos\HerfaTest\HerfaTest\obj\Debug\net6.0\HerfaTest.pdb
 C:\Users\b.alhassoun.ext\source\repos\HerfaTest\HerfaTest\obj\Debug\net6.0\HerfaTest.genruntimeconfig.cache
 C:\Users\b.alhassoun.ext\source\repos\HerfaTest\HerfaTest\obj\Debug\net6.0\ref\HerfaTest.dll
+C:\Users\b.alhassoun.ext\source\repos\HerfaTest\HerfaTest\obj\Debug\net6.0\HerfaTest.sourcelink.json
