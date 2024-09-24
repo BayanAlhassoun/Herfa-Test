@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HerfaTest.Data;
+using HerfaTest.AssistantMethods;
+using Bytescout.Spreadsheet;
 
 namespace HerfaTest.TestMethods
 {
@@ -33,17 +36,8 @@ namespace HerfaTest.TestMethods
 
 
             CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
-            Thread.Sleep(5000);
-            UserRegisterPage userRegisterPage = new UserRegisterPage(ManageDriver.driver);
-            userRegisterPage.EnterFirstName("Rinad");
-            userRegisterPage.EnterLastName("Mohammad");
-            userRegisterPage.EnterEmail("Rinad123@gmail.com");
-            userRegisterPage.EnterBirthdate("02-02-1999");
-            userRegisterPage.EnterPhoneNumber("07828392333");
-            userRegisterPage.ClickFemaleButton();
-            userRegisterPage.EnterPassword("Ba@123456");
-            userRegisterPage.EnterConfirmPassword("Ba@123456");
-            userRegisterPage.ClickSubmitButton();
+            User user = new User("Batool", "Shurman", "Batool@yahoo.com", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2000");
+            UserRegister_AssistantMethods.FillRegisterForm(user);
 
                 Thread.Sleep(2000);
                 var expectedURL = "https://localhost:44349/Auth/Login";
@@ -60,18 +54,8 @@ namespace HerfaTest.TestMethods
         {
 
             CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
-            Thread.Sleep(5000);
-
-            UserRegisterPage userRegisterPage = new UserRegisterPage(ManageDriver.driver);
-            userRegisterPage.EnterFirstName("Rinad");
-            userRegisterPage.EnterLastName("Mohammad");
-            userRegisterPage.EnterEmail("Rinad123gmail.com");
-            userRegisterPage.EnterBirthdate("02-02-1999");
-            userRegisterPage.EnterPhoneNumber("0782839233312");
-            userRegisterPage.ClickFemaleButton();
-            userRegisterPage.EnterPassword("Ba@123456");
-            userRegisterPage.EnterConfirmPassword("Ba@123456");
-            userRegisterPage.ClickSubmitButton();
+            User user = new User("Batool", "Shurman", "Batool@yahoocom", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2000");
+            UserRegister_AssistantMethods.FillRegisterForm(user);
             Thread.Sleep(2000);
             var expectedURL = "https://localhost:44349/Auth/RegisterUser";
             var actualURL = ManageDriver.driver.Url;
@@ -85,16 +69,19 @@ namespace HerfaTest.TestMethods
         {
             CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
             Thread.Sleep(5000);
-            UserRegisterPage userRegisterPage = new UserRegisterPage(ManageDriver.driver);
-            userRegisterPage.EnterFirstName("Rinad");
-            userRegisterPage.EnterLastName("Mohammad");
-            userRegisterPage.EnterEmail("Rinad1234@gmail.com");
-            userRegisterPage.EnterBirthdate("02-02-2010");
-            userRegisterPage.EnterPhoneNumber("07828326633312");
-            userRegisterPage.ClickFemaleButton();
-            userRegisterPage.EnterPassword("Ba@123456");
-            userRegisterPage.EnterConfirmPassword("Ba@123456");
-            userRegisterPage.ClickSubmitButton();
+            //User user = new User("Batool", "Shurman", "Batool@yahoo.com", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2011");
+            Worksheet worksheet = CommonMethods.ReadExcel("TestFaildRegister_InvalidBirthd");
+         
+            User user1 = new User();
+            user1.firstName = Convert.ToString(worksheet.Cell(1, 0).Value);
+            user1.lastName= (string)worksheet.Cell(1,1).Value;
+            user1.email = (string)worksheet.Cell(1, 2).Value;
+            user1.phoneNumber = Convert.ToString(worksheet.Cell(1, 3).Value);
+            user1.gender = (Gender)Enum.Parse(typeof(Gender), (string)worksheet.Cell(1,4).Value);
+            user1.Birthdate = Convert.ToString(worksheet.Cell(1, 5));
+            user1.password = Convert.ToString(worksheet.Cell(1,6).Value); 
+            user1.confirmPassword = Convert.ToString(worksheet.Cell(1,7).Value);
+            UserRegister_AssistantMethods.FillRegisterForm(user1);
             Thread.Sleep(2000);
 
             var expectedResult = "https://localhost:44349/Auth/RegisterUser";

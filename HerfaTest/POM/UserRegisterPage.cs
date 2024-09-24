@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using HerfaTest.Helpers;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,62 +31,86 @@ namespace HerfaTest.POM
 
         public void EnterFirstName(string value)
         {
-            _driver.FindElement(firstName).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(firstName);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
+
         }
 
         public void EnterLastName(string value)
         {
-            _driver.FindElement(lastName).SendKeys(value);
+
+            IWebElement element = CommonMethods.WaitAndFindElement(lastName);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void ClickMaleButton()
         {
-            _driver.FindElement(male).Click();
+           IWebElement element = CommonMethods.WaitAndFindElement(male);
+            CommonMethods.HighlightElement(element);
+            element.Click();
         }        
         
         public void ClickFemaleButton()
         {
-            _driver.FindElement(Female).Click();
+            IWebElement element = CommonMethods.WaitAndFindElement(Female);
+            CommonMethods.HighlightElement(element);
+            element.Click();
         }
 
         public void EnterBirthdate(string value)
         {
-            _driver.FindElement(birthdate).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(birthdate);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void EnterPhoneNumber(string value)
         {
-            _driver.FindElement(phonenumber).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(phonenumber);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void EnterEmail(string value)
         {
-            _driver.FindElement(email).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(email);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void EnterImage(string value)
         {
-            _driver.FindElement(image).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(image);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void EnterPassword(string value)
         {
-            _driver.FindElement(password).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(password);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void EnterConfirmPassword(string value)
         {
-            _driver.FindElement(confirmPassword).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(confirmPassword);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
         public void ClickSubmitButton()
         {
-            _driver.FindElement(SubmitButton).Click();
+          CommonMethods.WaitAndFindElement(SubmitButton).Click();
         }        
         
         public void ClickLoginLink()
         {
-            _driver.FindElement(loginLink).Click();
+            IWebElement element = CommonMethods.WaitAndFindElement(Female);
+            CommonMethods.HighlightElement(element);
+            element.Click();
         }
 
     }

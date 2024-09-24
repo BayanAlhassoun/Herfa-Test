@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using HerfaTest.Helpers;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,36 +29,39 @@ namespace HerfaTest.POM
          
         public void EnterEmail(string value)
         {
-            _driver.FindElement(email).SendKeys(value);
+            IWebElement element = CommonMethods.WaitAndFindElement(email);
+            CommonMethods.HighlightElement(element);
+            element.SendKeys(value);
         }
 
 
         public void EnterPassword(string value)
         {
-            _driver.FindElement(password).SendKeys(value);
+            CommonMethods.WaitAndFindElement(password).SendKeys(value);
         }
 
         public void ClickRememberMe()
         {
-            _driver.FindElement(rememberMe).Click();
+            IWebElement element = CommonMethods.WaitAndFindElement(rememberMe);
+            element.Click();
         }
 
         public void ClickShowPassword()
         {
-            _driver.FindElement(showPassword).Click();
+            CommonMethods.WaitAndFindElement(showPassword).Click();
         }        
         
         public void ClickForgotPassword()
         {
-            _driver.FindElement(forgotPassword).Click();
+            CommonMethods.WaitAndFindElement(forgotPassword).Click();
         }        
         public void ClickLoginButton()
         {
-            _driver.FindElement(loginButton).Click();
+            CommonMethods.WaitAndFindElement(loginButton).Click();
         }        
         public void ClickRegisterLink()
         {
-            _driver.FindElement(registerLink).Click();
+            CommonMethods.WaitAndFindElement(registerLink).Click();
         }
     }
 }

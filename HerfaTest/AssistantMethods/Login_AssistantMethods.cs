@@ -15,7 +15,6 @@ namespace HerfaTest.AssistantMethods
             LoginPage loginPage = new LoginPage(ManageDriver.driver);
             loginPage.EnterEmail(email);
             loginPage.EnterPassword(password);
-            Thread.Sleep(2000);
             loginPage.ClickLoginButton();
 
         }

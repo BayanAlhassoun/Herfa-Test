@@ -8,6 +8,7 @@ namespace HerfaTest.Data
 {
     public class User
     {
+        public User() { }
         public User(string firstName, string lastName, string email, string phoneNumber, string password, string confirmPassword, Gender gender, string birthdate, string image = null)
         {
             this.firstName = firstName;
