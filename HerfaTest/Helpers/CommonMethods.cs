@@ -50,5 +50,10 @@ namespace HerfaTest.Helpers
             return worksheet;
         }
 
+        public static void TakeScreenShot()
+        {
+            ITakesScreenshot takesScreenshot = (ITakesScreenshot)ManageDriver.driver;
+            Screenshot  screenshot = takesScreenshot.GetScreenshot();
+        }
     }
 }

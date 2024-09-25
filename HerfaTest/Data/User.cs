@@ -29,7 +29,7 @@ namespace HerfaTest.Data
         public string image { get; set; }
         public string password { get; set; }
         public string confirmPassword { get; set; }
-        public Gender gender { get; set; }
+        public Gender gender { get; set; } // Male, male, MALE, M, m
         public string Birthdate { get; set; }
 
     }

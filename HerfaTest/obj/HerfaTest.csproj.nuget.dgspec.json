@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[4.7.1.2054, )"
             },
+            "ExtentReports": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
               "version": "[2.2.10, )"

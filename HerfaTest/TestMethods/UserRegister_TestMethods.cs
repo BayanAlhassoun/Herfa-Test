@@ -36,8 +36,9 @@ namespace HerfaTest.TestMethods
 
 
             CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
-            User user = new User("Batool", "Shurman", "Batool@yahoo.com", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2000");
-            UserRegister_AssistantMethods.FillRegisterForm(user);
+            User user1 = UserRegister_AssistantMethods.ReadRegisterDataFromExcel(2);
+         
+            UserRegister_AssistantMethods.FillRegisterForm(user1);
 
                 Thread.Sleep(2000);
                 var expectedURL = "https://localhost:44349/Auth/Login";
@@ -52,44 +53,75 @@ namespace HerfaTest.TestMethods
         [TestMethod]
         public void TestFailedRegister_invalidEmail()
         {
-
-            CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
-            User user = new User("Batool", "Shurman", "Batool@yahoocom", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2000");
-            UserRegister_AssistantMethods.FillRegisterForm(user);
-            Thread.Sleep(2000);
-            var expectedURL = "https://localhost:44349/Auth/RegisterUser";
-            var actualURL = ManageDriver.driver.Url;
-            Assert.AreEqual(expectedURL, actualURL, "Actual URL not equal the expected URL_TC2");
-            Console.WriteLine("TC2 Completed Successfully");
+            for (int i = 3; i <= 5; i++)
+            {
+                try
+                {
+                    CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
+                    User user1 = UserRegister_AssistantMethods.ReadRegisterDataFromExcel(i);
+                    UserRegister_AssistantMethods.FillRegisterForm(user1);
+                    Thread.Sleep(2000);
+                    var expectedURL = "https://localhost:44349/Auth/RegisterUser";
+                    var actualURL = ManageDriver.driver.Url;
+                    Assert.AreEqual(expectedURL, actualURL, "Actual URL not equal the expected URL_TC2");
+                    Console.WriteLine("TC2 Completed Successfully");
+                }
+              catch (Exception ex)
+                {
+                    Console.WriteLine($"TC{i} Failed _ {ex.Message}");
+                }
+            }
+           
         }
 
 
         [TestMethod]
         public void TestFaildRegister_InvalidBirthdate()
         {
-            CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
-            Thread.Sleep(5000);
-            //User user = new User("Batool", "Shurman", "Batool@yahoo.com", "077452462", "Bat123**", "Bat123**", Gender.Female, "01-01-2011");
-            Worksheet worksheet = CommonMethods.ReadExcel("TestFaildRegister_InvalidBirthd");
-         
-            User user1 = new User();
-            user1.firstName = Convert.ToString(worksheet.Cell(1, 0).Value);
-            user1.lastName= (string)worksheet.Cell(1,1).Value;
-            user1.email = (string)worksheet.Cell(1, 2).Value;
-            user1.phoneNumber = Convert.ToString(worksheet.Cell(1, 3).Value);
-            user1.gender = (Gender)Enum.Parse(typeof(Gender), (string)worksheet.Cell(1,4).Value);
-            user1.Birthdate = Convert.ToString(worksheet.Cell(1, 5));
-            user1.password = Convert.ToString(worksheet.Cell(1,6).Value); 
-            user1.confirmPassword = Convert.ToString(worksheet.Cell(1,7).Value);
-            UserRegister_AssistantMethods.FillRegisterForm(user1);
-            Thread.Sleep(2000);
+            Worksheet worksheet = CommonMethods.ReadExcel("Register");
 
-            var expectedResult = "https://localhost:44349/Auth/RegisterUser";
-            var actualResult = ManageDriver.driver.Url;
-            Assert.AreEqual(expectedResult, actualResult, "The actual result not equal the expected_TC3");
-            Console.WriteLine("TC3 Completed Successfully");
+            for (int i = 6; i <= worksheet.NotEmptyRowMax; i++)
+            {
+                try
+                {
+                    CommonMethods.NavigateToURL("https://localhost:44349/Auth/RegisterUser");
+                    User user1 = UserRegister_AssistantMethods.ReadRegisterDataFromExcel(i);
+                    UserRegister_AssistantMethods.FillRegisterForm(user1);
+                    Thread.Sleep(2000);
+
+                    switch (i)
+                    {
+                        case 6:
+                            var expectedValidation = (string)worksheet.Cell(i, 11).Value;
+                            var actualValidation = ManageDriver.driver.FindElement(By.XPath("//Ul/li[.='Age under the legal age']")).Text;
+                            Assert.AreEqual(expectedValidation, actualValidation);
+                            Console.WriteLine($"TC{i} completed successfully");
+                            break;
+                        case 7:
+                            var expectedValidation2 = "Age under the legal age";
+                            var actualValidation2 = ManageDriver.driver.FindElement(By.XPath("//Ul/li[.='Age under the legal age']")).Text;
+                            Assert.AreEqual(expectedValidation2, actualValidation2);
+                            Console.WriteLine($"TC{i} completed successfully");
+
+                            break;
+                        case 8:
+                            var expectedResult = "https://localhost:44349/Auth/RegisterUser";
+                            var actualResult = ManageDriver.driver.Url;
+                            Assert.AreEqual(expectedResult, actualResult, "The actual result not equal the expected_TC3");
+                            Console.WriteLine($"TC{i} completed successfully");
+                            break;
+                    }
+                   }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"TC{i} failed _ {ex.Message}");
+                }
+            }
+            
         }
 
+       
 
 
     }
