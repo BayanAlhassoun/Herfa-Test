@@ -2,6 +2,7 @@
 using HerfaTest.Data;
 using HerfaTest.Helpers;
 using HerfaTest.POM;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,27 @@ namespace HerfaTest.AssistantMethods
             user.password = Convert.ToString(worksheet.Cell(row, 8).Value);
             user.confirmPassword = Convert.ToString(worksheet.Cell(row, 9).Value);
             return user;
+        }
+
+        public static bool CheckSuccessRegister(string email)
+        {
+            bool isDataExist = false;
+            string query = "Select count(*) from login_fp where email = :value";
+
+            using (OracleConnection connection = new OracleConnection(GlobalConstants.connectionString))
+            {
+                connection.Open();
+
+                OracleCommand command = new OracleCommand(query, connection);
+                command.Parameters.Add(new OracleParameter(":value", email));
+
+                int result = Convert.ToInt32(command.ExecuteScalar());
+
+                isDataExist = result > 0;
+                return isDataExist;
+
+                //ExecuteReader
+            }
         }
     }
 }

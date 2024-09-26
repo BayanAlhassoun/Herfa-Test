@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,10 +51,15 @@ namespace HerfaTest.Helpers
             return worksheet;
         }
 
-        public static void TakeScreenShot()
+        public static string TakeScreenShot()
         {
             ITakesScreenshot takesScreenshot = (ITakesScreenshot)ManageDriver.driver;
             Screenshot  screenshot = takesScreenshot.GetScreenshot();
+            string path = "C:\\Users\\b.alhassoun.ext\\Documents\\HerfaTestReport\\ScreenShots";
+            string imageName = Guid.NewGuid().ToString() + "_image.png";
+            string fullPath = Path.Combine(path + $"\\{imageName}"); // C:\\Users\\b.alhassoun.ext\\Documents\\HerfaTestReport\\xxxxxxxxxxxxxxxxx_image.png
+            screenshot.SaveAsFile(fullPath);
+            return fullPath;
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HerfaTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+335d0e9f98503e1d715864b85a5b93e54608990c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6278c6dc7e0b3552abdbde1113bc7dbf364ece6")]
 [assembly: System.Reflection.AssemblyProductAttribute("HerfaTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HerfaTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
